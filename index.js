@@ -49,7 +49,7 @@ function displaySongs(song) {
     likesBtn.dataset.id = song.id
     editBtn.dataset.id = song.id
     deleteBtn.dataset.id = song.id
-    editSong.dataset.id = song.id
+    // editSong.dataset.id = song.id
     // li.dataset.id = song.id
     // artist.dataset.id = song.id
     // title.dataset.id = song.id
@@ -63,13 +63,17 @@ function displaySongs(song) {
     // append to DOM
     likesBtn.append(likeCount)
     li.append(img, video, title, artist, likesBtn, editBtn, deleteBtn)
+    // li.innerHTML = `<iframe width="950" height="534" src="${song.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    // li.append(img, title, artist, likesBtn, editBtn, deleteBtn)
     songList.append(li)
     songList.append(br)
 }
 
 // show edit form
 function showEditForm(e) {
+    console.log(e.target.dataset.id)
     alterSong.hidden = false
+    editSong.dataset.id = e.target.dataset.id
     populateEditForm(editSong)
 }
 
@@ -103,12 +107,12 @@ function changeSong(e) {
         })
     })
     .then(res => res.json())
-    .then(displaySongs)
+    .then(getSongs())
 }
 
 // add likes
 function addLike(e) {
-    console.log(e.target.firstElementChild.innerText)
+    // console.log(e.target.firstElementChild.innerText)
     let likes = e.target.firstElementChild.innerText
     likes++
     fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
@@ -120,7 +124,7 @@ function addLike(e) {
             "likes": likes
         })
     })
-    .then(() => e.target.firstElementChild.innerText = likes)
+    .then(() => e.target.firstElementChild.textContent = likes)
 }
 
 // post song
