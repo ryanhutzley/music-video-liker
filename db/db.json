@@ -3,10 +3,34 @@
     {
       "id": 1,
       "title": "Chinua Achebe",
-      "artist": "Jacob Collier",
+      "artist": "Poppy",
       "image": "https://upload.wikimedia.org/wikipedia/en/e/e2/I_Disagree_Poppy.png",
-      "video": "https://www.youtube.com/embed?v=fiH9YPSPNlA",
-      "likes": 13
+      "video": "https://www.youtube.com/embed/fiH9YPSPNlA",
+      "likes": 58
+    },
+    {
+      "title": "Cereal",
+      "artist": "Tony the Tiger",
+      "image": "https://upload.wikimedia.org/wikipedia/en/c/c8/Tony_the_Tiger_%28Kellogg%27s_Frosted_Flakes%27_mascot%29.jpg",
+      "video": "https://www.youtube.com/embed/g_wu_qqyj9s",
+      "likes": 57,
+      "id": 2
+    },
+    {
+      "title": "Whole Life",
+      "artist": "TK",
+      "image": "",
+      "video": "https://www.youtube.com/embed/MHs2zjJOdQ8",
+      "likes": 3,
+      "id": 3
+    },
+    {
+      "title": "Sleeping On My Dreams",
+      "artist": "Jacob Collier",
+      "image": "https://sungenre.com/wp-content/uploads/2020/08/jacob-collier-djesse-vol-3.jpg",
+      "video": "https://www.youtube.com/embed/dR4IwtiEbyo",
+      "likes": 0,
+      "id": 4
     }
   ]
 }
