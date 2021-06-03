@@ -1,4 +1,5 @@
 // get elements
+const bestSongContainer = document.querySelector('#best-song-container')
 const bestSong = document.querySelector('#best-song')
 const songList = document.querySelector('#song-list')
 const addSong = document.querySelector('#add-song')
@@ -25,6 +26,7 @@ getSongs()
 function displaySongs(song) {
     // creating elements
     let li = document.createElement('li')
+    li.setAttribute('class', "list-item")
     let artist = document.createElement('h3')
     let title = document.createElement('h2')
     let img = document.createElement('img')
@@ -47,6 +49,9 @@ function displaySongs(song) {
     editBtn.textContent = "Edit"
     deleteBtn.textContent = "Delete"
     // setting attributes
+    likesBtn.setAttribute('class', 'button-class')
+    editBtn.setAttribute('class', 'button-class')
+    deleteBtn.setAttribute('class', 'button-class')
     likesBtn.dataset.id = song.id
     editBtn.dataset.id = song.id
     deleteBtn.dataset.id = song.id
@@ -81,6 +86,7 @@ function showEditForm(e) {
 
 // populate edit form
 function populateEditForm(form) {
+    document.documentElement.scrollTop = 0;
     let id = form.dataset.id
     let titleList = document.querySelectorAll('h2')
     let artistList = document.querySelectorAll('h3')
@@ -171,6 +177,7 @@ function removeSong(e) {
 // getting best song
 function getBestSong() {
     bestSong.innerHTML = ""
+    bestSongContainer.hidden = false
     let spanList = document.querySelectorAll('span')
     let spanArray = Array.from(spanList)
     let likesArray = spanArray.map(element => parseInt(element.textContent))
@@ -183,16 +190,21 @@ function getBestSong() {
     let imageList = document.querySelectorAll('img')
     let videoList = document.querySelectorAll('iframe')
 
+    let li = document.createElement('li')
     let artist = document.createElement('h3')
     let title = document.createElement('h2')
     let img = document.createElement('img')
     let video = document.createElement('iframe')
-    let br = document.createElement('br')
+    // let br = document.createElement('br')
 
     title.textContent = titleList[id - 1].textContent
     artist.textContent = artistList[id - 1].textContent
     img.src = imageList[id - 1].src
+    img.height = 250
     video.src = videoList[id - 1].src
+    video.width = 400
+    video.height = 250
 
-    bestSong.append(img, video, title, artist, br)    
+    li.append(img, video, title, artist) 
+    bestSong.append(li)   
 }
