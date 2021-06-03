@@ -4,12 +4,13 @@ const songList = document.querySelector('#song-list')
 const addSong = document.querySelector('#add-song')
 const alterSong = document.querySelector('#alter-song')
 const editSong = document.querySelector('#edit-song')
+const getBest = document.querySelector('#get-best')
 
-// editSong.hidden = true
 
 // event listner
 addSong.addEventListener('submit', postSong)
-alterSong.addEventListener('submit', changeSong)
+editSong.addEventListener('submit', changeSong)
+getBest.addEventListener('click', getBestSong)
 
 // get songs
 function getSongs() {
@@ -49,6 +50,7 @@ function displaySongs(song) {
     likesBtn.dataset.id = song.id
     editBtn.dataset.id = song.id
     deleteBtn.dataset.id = song.id
+    likeCount.dataset.id = song.id
     // editSong.dataset.id = song.id
     // li.dataset.id = song.id
     // artist.dataset.id = song.id
@@ -71,7 +73,7 @@ function displaySongs(song) {
 
 // show edit form
 function showEditForm(e) {
-    console.log(e.target.dataset.id)
+    // console.log(e.target.dataset.id)
     alterSong.hidden = false
     editSong.dataset.id = e.target.dataset.id
     populateEditForm(editSong)
@@ -107,7 +109,10 @@ function changeSong(e) {
         })
     })
     .then(res => res.json())
-    .then(getSongs())
+    .then(() => {
+        getSongs()
+        e.target.reset()
+    })
 }
 
 // add likes
@@ -129,6 +134,8 @@ function addLike(e) {
 
 // post song
 function postSong(e) {
+    let urlArray = e.target.video.value.split("=")
+    let resource = urlArray[1]
     fetch("http://localhost:3000/songs", {
         method: "POST",
         headers: {
@@ -138,7 +145,7 @@ function postSong(e) {
             "title": e.target.title.value,
             "artist": e.target.artist.value,
             "image": e.target.image.value,
-            "video": e.target.video.value,
+            "video": `https://www.youtube.com/embed/${resource}`,
             "likes": 0,
         })
     })
@@ -159,4 +166,33 @@ function removeSong(e) {
         let liList = document.querySelectorAll('li')
         liList[id - 1].remove()
     })
+}
+
+// getting best song
+function getBestSong() {
+    bestSong.innerHTML = ""
+    let spanList = document.querySelectorAll('span')
+    let spanArray = Array.from(spanList)
+    let likesArray = spanArray.map(element => parseInt(element.textContent))
+    let maxLikes = Math.max(...likesArray)
+    let index = likesArray.indexOf(maxLikes)
+    let id = spanList[index].dataset.id
+
+    let titleList = document.querySelectorAll('h2')
+    let artistList = document.querySelectorAll('h3')
+    let imageList = document.querySelectorAll('img')
+    let videoList = document.querySelectorAll('iframe')
+
+    let artist = document.createElement('h3')
+    let title = document.createElement('h2')
+    let img = document.createElement('img')
+    let video = document.createElement('iframe')
+    let br = document.createElement('br')
+
+    title.textContent = titleList[id - 1].textContent
+    artist.textContent = artistList[id - 1].textContent
+    img.src = imageList[id - 1].src
+    video.src = videoList[id - 1].src
+
+    bestSong.append(img, video, title, artist, br)    
 }
