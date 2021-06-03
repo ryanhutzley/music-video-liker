@@ -95,21 +95,11 @@ function populateEditForm(form) {
     let titleArray = Array.from(titleList)
     
     let artistList = document.querySelectorAll('h3')
-    // let artistArray = Array.from(artistList)
     let imageList = document.querySelectorAll('img')
-    // let imageArray = Array.from(imageList)
     let videoList = document.querySelectorAll('iframe')
-    // let videoArray = Array.from(videoList)
     
     let titleIDs = titleArray.map(element => element.dataset.id)
-    // let artistIDs = titleArray.map(element => element.dataset.id)
-    // let imageIDs = titleArray.map(element => element.dataset.id)
-    // let videoIDs = titleArray.map(element => element.dataset.id)
-    
     let index = titleIDs.indexOf(id)
-    // let artistindex = artistIDs.indexOf(id)
-    // let imageIndex = imageIDs.indexOf(id)
-    // let videoIndex = videoIDs.indexOf(id)
 
     form.title.value = titleList[index].textContent
     form.artist.value = artistList[index].textContent
@@ -160,6 +150,7 @@ function addLike(e) {
 
 // post song
 function postSong(e) {
+    e.preventDefault()
     let urlArray = e.target.video.value.split("=")
     let resource = urlArray[1]
     fetch("http://localhost:3000/songs", {
@@ -176,7 +167,10 @@ function postSong(e) {
         })
     })
     .then(res => res.json())
-    .then(displaySongs)
+    .then(song => {
+        displaySongs(song)
+        e.target.reset()
+    })
 }
 
 // remove song
@@ -223,7 +217,6 @@ function getBestSong() {
     let artist = document.createElement('h3')
     let img = document.createElement('img')
     let video = document.createElement('iframe')
-    // let br = document.createElement('br')
 
     title.textContent = titleList[newIndex].textContent
     artist.textContent = artistList[newIndex].textContent
