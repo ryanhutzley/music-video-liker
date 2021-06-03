@@ -3,14 +3,14 @@ const bestSongContainer = document.querySelector('#best-song-container')
 const bestSong = document.querySelector('#best-song')
 const songList = document.querySelector('#song-list')
 const addSong = document.querySelector('#add-song')
-const alterSong = document.querySelector('#alter-song')
+const hiddenEditDiv = document.querySelector('#hidden-edit-div')
 const editSong = document.querySelector('#edit-song')
 const getBest = document.querySelector('#get-best')
 
 
 // event listner
 addSong.addEventListener('submit', postSong)
-editSong.addEventListener('submit', changeSong)
+editSong.addEventListener('submit', changeSongInfo)
 getBest.addEventListener('click', getBestSong)
 
 // get songs
@@ -24,9 +24,9 @@ getSongs()
 
 // display songs
 function displaySongs(song) {
+
     // creating elements
     let li = document.createElement('li')
-    li.setAttribute('class', "list-item")
     let artist = document.createElement('h3')
     let title = document.createElement('h2')
     let img = document.createElement('img')
@@ -36,6 +36,7 @@ function displaySongs(song) {
     let editBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
     let br = document.createElement('br')
+
     // setting values
     artist.textContent = song.artist
     title.textContent = song.title 
@@ -45,23 +46,26 @@ function displaySongs(song) {
     video.width = 400
     video.height = 250
     likesBtn.textContent = "Likes:"
-    likeCount.innerText = song.likes
+    likeCount.textContent = song.likes
     editBtn.textContent = "Edit"
     deleteBtn.textContent = "Delete"
+
     // setting attributes
+    li.setAttribute('class', "list-item")
     likesBtn.setAttribute('class', 'button-class')
     editBtn.setAttribute('class', 'button-class')
     deleteBtn.setAttribute('class', 'button-class')
+    img.setAttribute('class', 'visuals')
+    video.setAttribute('class', 'visuals')
     likesBtn.dataset.id = song.id
     editBtn.dataset.id = song.id
     deleteBtn.dataset.id = song.id
     likeCount.dataset.id = song.id
-    // editSong.dataset.id = song.id
-    // li.dataset.id = song.id
-    // artist.dataset.id = song.id
-    // title.dataset.id = song.id
-    // img.dataset.id = song.id
-    // video.dataset.id = song.id
+    li.dataset.id = song.id
+    artist.dataset.id = song.id
+    title.dataset.id = song.id
+    img.dataset.id = song.id
+    video.dataset.id = song.id
 
     // add event listeners
     likesBtn.addEventListener('click', addLike)
@@ -78,8 +82,7 @@ function displaySongs(song) {
 
 // show edit form
 function showEditForm(e) {
-    // console.log(e.target.dataset.id)
-    alterSong.hidden = false
+    hiddenEditDiv.hidden = false
     editSong.dataset.id = e.target.dataset.id
     populateEditForm(editSong)
 }
@@ -89,17 +92,33 @@ function populateEditForm(form) {
     document.documentElement.scrollTop = 0;
     let id = form.dataset.id
     let titleList = document.querySelectorAll('h2')
+    let titleArray = Array.from(titleList)
+    
     let artistList = document.querySelectorAll('h3')
+    // let artistArray = Array.from(artistList)
     let imageList = document.querySelectorAll('img')
+    // let imageArray = Array.from(imageList)
     let videoList = document.querySelectorAll('iframe')
-    form.title.value = titleList[id - 1].textContent
-    form.artist.value = artistList[id - 1].textContent
-    form.image.value = imageList[id - 1].src
-    form.video.value = videoList[id - 1].src
+    // let videoArray = Array.from(videoList)
+    
+    let titleIDs = titleArray.map(element => element.dataset.id)
+    // let artistIDs = titleArray.map(element => element.dataset.id)
+    // let imageIDs = titleArray.map(element => element.dataset.id)
+    // let videoIDs = titleArray.map(element => element.dataset.id)
+    
+    let index = titleIDs.indexOf(id)
+    // let artistindex = artistIDs.indexOf(id)
+    // let imageIndex = imageIDs.indexOf(id)
+    // let videoIndex = videoIDs.indexOf(id)
+
+    form.title.value = titleList[index].textContent
+    form.artist.value = artistList[index].textContent
+    form.image.value = imageList[index].src
+    form.video.value = videoList[index].src
 }
 
 // edit song
-function changeSong(e) {
+function changeSongInfo(e) {
     e.preventDefault()
     songList.innerHTML = ""
     fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
@@ -118,13 +137,14 @@ function changeSong(e) {
     .then(() => {
         getSongs()
         e.target.reset()
+        hiddenEditDiv.hidden = true
     })
 }
 
 // add likes
 function addLike(e) {
     // console.log(e.target.firstElementChild.innerText)
-    let likes = e.target.firstElementChild.innerText
+    let likes = e.target.firstElementChild.textContent
     likes++
     fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
         method: "PATCH",
@@ -170,7 +190,10 @@ function removeSong(e) {
     })
     .then(() => {
         let liList = document.querySelectorAll('li')
-        liList[id - 1].remove()
+        let liArray = Array.from(liList)
+        let liIDs = liArray.map(element => element.dataset.id)
+        let index = liIDs.indexOf(id)
+        liList[index].remove()
     })
 }
 
@@ -190,18 +213,23 @@ function getBestSong() {
     let imageList = document.querySelectorAll('img')
     let videoList = document.querySelectorAll('iframe')
 
+    let arrayTitle = Array.from(titleList)
+    let arrayIDs = arrayTitle.map(element => element.dataset.id)
+    let newIndex = arrayIDs.indexOf(id)
+
     let li = document.createElement('li')
-    let artist = document.createElement('h3')
+    li.setAttribute('id', 'most-liked-song')
     let title = document.createElement('h2')
+    let artist = document.createElement('h3')
     let img = document.createElement('img')
     let video = document.createElement('iframe')
     // let br = document.createElement('br')
 
-    title.textContent = titleList[id - 1].textContent
-    artist.textContent = artistList[id - 1].textContent
-    img.src = imageList[id - 1].src
+    title.textContent = titleList[newIndex].textContent
+    artist.textContent = artistList[newIndex].textContent
+    img.src = imageList[newIndex].src
     img.height = 250
-    video.src = videoList[id - 1].src
+    video.src = videoList[newIndex].src
     video.width = 400
     video.height = 250
 

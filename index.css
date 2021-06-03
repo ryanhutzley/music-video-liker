@@ -9,22 +9,36 @@ h4 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
+img {
+    width: 250px;
+    height: 250px;
+    margin-right: 20px
+}
 #get-best {
     text-align: center;
 }
 #add-song {
     display: inline-block;
 }
+
 #best-song {
     margin: auto;
     width: 50%;
     padding: 10px;
     border: 3px solid;
-    border-color: gold;
+    border-color: rgb(255, 0, 0);
     list-style-type: none;
     justify-content: center;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: gold;
+}
+
+#best-song-header {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    color:rgb(255, 0, 0);
+    text-decoration: underline;
 }
 
 #best-button {
@@ -33,17 +47,23 @@ h4 {
     padding-left: 25px;
     padding-right: 25px;
 }
+
+#get-best {
+    font-weight: bold;
+}
+
 #song-container {
     margin: auto;
     justify-content: center;
     text-align: center;
-    width: 50%;
+    width: 53%;
     padding: 10px;
 }
 
 .list-item {
     margin: auto;
     width: 100%;
+    position: relative;
     padding: 10px;
     border: 3px solid;
     border-color: black;
@@ -59,7 +79,7 @@ h4 {
     padding: 10px;
 }
 
-#alter-song {
+#hidden-edit-div {
     margin: auto;
     width: 50%;
     padding: 10px;
@@ -67,7 +87,9 @@ h4 {
 #song-list {
     font-family: Arial, Helvetica, sans-serif;
     list-style-type: none;
-
+    text-align: center;
+    width: 100%;
+    padding: 10px;
 }
 button{
     background-color: #4CAF50; /* Green */
