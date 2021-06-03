@@ -6,14 +6,14 @@
       "artist": "Poppy",
       "image": "https://upload.wikimedia.org/wikipedia/en/e/e2/I_Disagree_Poppy.png",
       "video": "https://www.youtube.com/embed/fiH9YPSPNlA",
-      "likes": 8
+      "likes": 14
     },
     {
       "title": "Sleeping On My Dreams",
       "artist": "Jacob Collier",
       "image": "https://sungenre.com/wp-content/uploads/2020/08/jacob-collier-djesse-vol-3.jpg",
       "video": "https://www.youtube.com/embed/dR4IwtiEbyo",
-      "likes": 7,
+      "likes": 17,
       "id": 2
     },
     {
@@ -21,7 +21,7 @@
       "artist": "Cory Wong",
       "image": "https://e.snmc.io/i/600/s/d255427432e6d80efe5a0c4a26dfcd31/7914788",
       "video": "https://www.youtube.com/embed/zqw6y61p328",
-      "likes": 4,
+      "likes": 11,
       "id": 3
     },
     {
@@ -31,6 +31,22 @@
       "video": "https://www.youtube.com/embed/p3ZPY9mIQsk",
       "likes": 5,
       "id": 4
+    },
+    {
+      "title": "Rock You",
+      "artist": "Dirty Loops",
+      "image": "https://m.media-amazon.com/images/I/91wvsuZJ8lL._SS500_.jpg",
+      "video": "https://www.youtube.com/embed/gYc5zrXC52k",
+      "likes": 18,
+      "id": 5
+    },
+    {
+      "title": "Lingus",
+      "artist": "Snarky Puppy",
+      "image": "https://pbs.twimg.com/profile_images/1098654209938018305/OmUxnLoq_400x400.jpg",
+      "video": "https://www.youtube.com/embed/L_XJ_s5IsQc",
+      "likes": 11,
+      "id": 6
     }
   ]
 }
