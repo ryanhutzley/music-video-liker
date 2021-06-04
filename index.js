@@ -110,8 +110,8 @@ function populateEditForm(form) {
 // edit song
 function changeSongInfo(e) {
     e.preventDefault()
-    songList.innerHTML = ""
-    fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
+    let id = e.target.dataset.id
+    fetch(`http://localhost:3000/songs/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -125,7 +125,21 @@ function changeSongInfo(e) {
     })
     .then(res => res.json())
     .then(() => {
-        getSongs()
+        let titleList = document.querySelectorAll('h2')
+        let titleArray = Array.from(titleList)
+    
+        let artistList = document.querySelectorAll('h3')
+        let imageList = document.querySelectorAll('img')
+        let videoList = document.querySelectorAll('iframe')
+        
+        let titleIDs = titleArray.map(element => element.dataset.id)
+        let index = titleIDs.indexOf(id)
+
+        titleList[index].textContent = e.target.title.value
+        artistList[index].textContent = e.target.artist.value,
+        imageList[index].src = e.target.image.value
+        videoList[index].src = e.target.video.value
+        
         e.target.reset()
         hiddenEditDiv.hidden = true
     })
@@ -133,7 +147,7 @@ function changeSongInfo(e) {
 
 // add likes
 function addLike(e) {
-    // console.log(e.target.firstElementChild.innerText)
+    console.log(e.target)
     let likes = e.target.firstElementChild.textContent
     likes++
     fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
