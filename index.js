@@ -148,7 +148,13 @@ function changeSongInfo(e) {
 // add likes
 function addLike(e) {
     console.log(e.target)
-    let likes = e.target.firstElementChild.textContent
+    let span
+    if (e.target.firstElementChild) {
+        span = e.target.firstElementChild
+    } else {
+        span = e.target
+    }
+    let likes = span.textContent
     likes++
     fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
         method: "PATCH",
@@ -159,7 +165,7 @@ function addLike(e) {
             "likes": likes
         })
     })
-    .then(() => e.target.firstElementChild.textContent = likes)
+    .then(() => span.textContent = likes)
 }
 
 // post song
