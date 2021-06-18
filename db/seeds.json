@@ -1,0 +1,12 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "title": "Chinua Achebe",
+      "artist": "Poppy",
+      "image": "https://upload.wikimedia.org/wikipedia/en/e/e2/I_Disagree_Poppy.png",
+      "video": "https://www.youtube.com/watch?v=fiH9YPSPNlA",
+      "likes": 10
+    }
+  ]
+}
