@@ -15,7 +15,7 @@ getBest.addEventListener('click', getBestSong)
 
 // get songs
 function getSongs() {
-    fetch("http://localhost:3000/songs")
+    fetch("https://evening-headland-09461.herokuapp.com/songs")
     .then(res => res.json())
     .then(songs => songs.forEach(displaySongs))
 }
