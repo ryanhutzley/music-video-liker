@@ -111,7 +111,7 @@ function populateEditForm(form) {
 function changeSongInfo(e) {
     e.preventDefault()
     let id = e.target.dataset.id
-    fetch(`http://localhost:3000/songs/${id}`, {
+    fetch(`https://evening-headland-09461.herokuapp.com/songs/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -156,7 +156,7 @@ function addLike(e) {
     }
     let likes = span.textContent
     likes++
-    fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
+    fetch(`https://evening-headland-09461.herokuapp.com/songs/${e.target.dataset.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -173,7 +173,7 @@ function postSong(e) {
     e.preventDefault()
     let urlArray = e.target.video.value.split("=")
     let resource = urlArray[1]
-    fetch("http://localhost:3000/songs", {
+    fetch("https://evening-headland-09461.herokuapp.com/songs", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -196,7 +196,7 @@ function postSong(e) {
 // remove song
 function removeSong(e) {
     let id = e.target.dataset.id
-    fetch(`http://localhost:3000/songs/${e.target.dataset.id}`, {
+    fetch(`https://evening-headland-09461.herokuapp.com/songs/${e.target.dataset.id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
